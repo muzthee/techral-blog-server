@@ -9,12 +9,23 @@ import { buildConfig } from 'payload/config';
 import Users from './collections/Users';
 import Media from './collections/Media';
 import Post from './collections/Post';
+import { Icon } from './graphics/icon';
+import { Logo } from './graphics/logo';
 
 export default buildConfig({
   admin: {
-    meta: {},
+    meta: {
+      favicon: '/assets/logo-white.svg',
+      ogImage: '/assets/logo-white.svg',
+    },
     user: Users.slug,
     bundler: webpackBundler(), // bundler-config
+    components: {
+      graphics: {
+        Icon,
+        Logo,
+      },
+    },
   },
   editor: slateEditor({}), // editor-config
   collections: [Users, Media, Post],
@@ -30,5 +41,6 @@ export default buildConfig({
     url: process.env.DATABASE_URI,
   }),
   upload: {},
+
   // database-adapter-config-end
 });
